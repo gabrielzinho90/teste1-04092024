@@ -7,7 +7,22 @@ def calculator(consumption: list, distributor_tax: float, tax_type: str) -> tupl
     applied_discount = 0
     coverage = 0
 
-    # your code here #
+    average_consumption = sum(consumption) / len(consumption)
+
+    if average_consumption < 10000:
+        discount = {'residential': 0.18, 'commercial': 0.16, 'industrial': 0.12}[tax_type.lower()]
+        coverage = 0.90
+    elif 10000 <= average_consumption <= 20000:
+        discount = {'residential': 0.22, 'commercial': 0.18, 'industrial': 0.15}[tax_type.lower()]
+        coverage = 0.95
+    else:
+        discount = {'residential': 0.25, 'commercial': 0.22, 'industrial': 0.18}[tax_type.lower()]
+        coverage = 0.99
+
+    monthly_savings = average_consumption * distributor_tax * discount
+    annual_savings = monthly_savings * 12
+
+    
 
     return (
         round(annual_savings, 2),
