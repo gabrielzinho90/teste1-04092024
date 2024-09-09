@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Economia de Energia</title>
+</head>
+<body>
+    <h1>Calculadora de Economia de Energia</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="month1">Consumo no mês 1 (kWh):</label>
+        <input type="number" step="any" id="month1" name="month1" required><br>
+
+        <label for="month2">Consumo no mês 2 (kWh):</label>
+        <input type="number" step="any" id="month2" name="month2" required><br>
+
+        <label for="month3">Consumo no mês 3 (kWh):</label>
+        <input type="number" step="any" id="month3" name="month3" required><br>
+
+        <label for="distributor_tax">Tarifa da distribuidora (R$/kWh):</label>
+        <input type="number" step="any" id="distributor_tax" name="distributor_tax" required><br>
+
+        <label for="tax_type">Tipo de Tarifa:</label>
+        <select id="tax_type" name="tax_type" required>
+            <option value="Residencial">Residencial</option>
+            <option value="Comercial">Comercial</option>
+            <option value="Industrial">Industrial</option>
+        </select><br>
+
+        <button type="submit">Calcular</button>
+    </form>
+
+    {% if annual_savings %}
+    <h2>Resultados</h2>
+    <p>Economia Anual: R$ {{ annual_savings }}</p>
+    <p>Economia Mensal: R$ {{ monthly_savings }}</p>
+    <p>Desconto Aplicado: {{ applied_discount }}%</p>
+    <p>Percentual de Cobertura: {{ coverage }}%</p>
+    {% endif %}
+</body>
+</html>
